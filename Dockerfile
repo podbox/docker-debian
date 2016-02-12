@@ -1,10 +1,7 @@
 FROM debian:stretch
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN echo 'APT::Install-Recommends "false";' >> /etc/apt/apt.conf \
- && echo 'APT::Install-Suggests   "false";' >> /etc/apt/apt.conf
-
-RUN cat /etc/apt/apt.conf
+RUN echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf
 
 RUN apt-get -qq update     \
  && apt-get -qq upgrade -y \
