@@ -1,9 +1,14 @@
 FROM debian:stretch
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update  -qq \
- && apt-get upgrade -yqq \
- && apt-get install -yqq apt-utils apt-transport-https locales curl unzip bzip2 vim \
+RUN echo 'APT::Install-Recommends "false";' >> /etc/apt/apt.conf \
+ && echo 'APT::Install-Suggests   "false";' >> /etc/apt/apt.conf
+
+RUN cat /etc/apt/apt.conf
+
+RUN apt-get -qq update     \
+ && apt-get -qq upgrade -y \
+ && apt-get -qq install -y apt-utils apt-transport-https locales curl unzip bzip2 vim \
  && apt-get clean
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
